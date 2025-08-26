@@ -2,57 +2,122 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Your Name — Developer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your Name — Personal Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #0f1117;
+      --text: #ffffffcc;
+      --accent: #00ffe1;
+      --card: #1c1e26;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 0 20px;
+      margin: 0;
+      padding: 0;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
-      background-color: #f9f9f9;
-      color: #333;
     }
-    header, footer {
+
+    header {
       text-align: center;
-      margin-bottom: 40px;
+      padding: 4rem 2rem 2rem;
     }
-    a {
-      color: #007acc;
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #aaa;
+    }
+
+    nav {
+      text-align: center;
+      padding: 1rem;
+      background: var(--card);
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: var(--accent);
       text-decoration: none;
+      font-weight: bold;
     }
-    a:hover {
+
+    nav a:hover {
       text-decoration: underline;
     }
-    article {
-      margin-bottom: 30px;
+
+    .section {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      border-bottom: 1px solid #333;
     }
-    h1, h2 {
-      color: #222;
+
+    h2 {
+      color: var(--accent);
+      font-size: 1.6rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
     }
   </style>
 </head>
 <body>
-<nav>
-    <a href="index.html">Home</a> |
-    <a href="blogs.html">Blogs</a> |
-  </nav>
+
   <header>
-    <h1>Welcome to My Personal Website</h1>
-    <p>Here I share my projects, blog posts, and updates related to computer science and AI safety.</p>
+    <h1>Your Name</h1>
+    <p>Developer • Cybersecurity • AI • Code</p>
   </header>
 
-  <main>
-    <article>
-      <h2>About Me</h2>
-      <p>Hi! I’m Shakthi, a computer science student passionate about coding, cybersecurity, and AI ethics.</p>
-    </article>
-  </main>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="blogs.html">Blog</a>
+    <!-- <a href="projects.html">Projects</a> -->
+  </nav>
+
+  <div class="section">
+    <h2>🧠 About Me</h2>
+    <p>I’m a student developer interested in cybersecurity, AI, and building smart tools. Currently working on a phishing scanner and learning about AI safety.</p>
+  </div>
+
+  <div class="section">
+    <h2>📌 Latest Blog</h2>
+    <p><strong>AI Safety: Why It Matters</strong><br>
+    Exploring the risks of large models and how developers can build responsibly.</p>
+    <p><a href="blogs.html" style="color: var(--accent);">Read more →</a></p>
+  </div>
+
+  <div class="section">
+    <h2>🧰 Tools I’m Building</h2>
+    <p>PhishScanner — A tool that detects suspicious emails. Currently in development with a focus on user-friendly design.</p>
+  </div>
 
   <footer>
-    <p>© Shakthi K. All rights reserved. No part of this website or its contents may be copied, reproduced, or used without permission.</p>
+    &copy; 2025 Your Name. All rights reserved.
   </footer>
+
 </body>
 </html>
-
