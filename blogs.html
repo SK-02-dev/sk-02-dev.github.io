@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Shakthi K — Blog</title>
+<title>Blog — Shakthi K</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
@@ -26,8 +26,8 @@
 
   <main>
     <header>
-      <h1>Shakthi K</h1>
-      <p class="typed" aria-live="polite" aria-atomic="true">Developer • Cybersecurity • AI • Code</p>
+      <h1>Blog</h1>
+      <p>Thoughts, updates, and insights on development, AI, and cybersecurity.</p>
     </header>
 
     <nav role="navigation" aria-label="Main navigation">
@@ -36,10 +36,7 @@
       <!-- <a href="projects.html">Projects</a> Uncomment when ready -->
     </nav>
 
-    <section class="section blog-list" id="blog-list">
-      <h2>📝 Blog Posts</h2>
-
-      <!-- Blog Post Card -->
+    <section class="section blog-list">
       <article class="blog-card">
         <h3>AI Safety: Why It Matters</h3>
         <p>Exploring the risks of large models and how developers can build responsibly.</p>
@@ -47,18 +44,12 @@
       </article>
 
       <article class="blog-card">
-        <h3>Understanding Phishing Scams</h3>
-        <p>A deep dive into common phishing techniques and how to protect yourself.</p>
-        <a href="posts/post-phishing.html">Read more →</a>
+        <h3>PhishScanner: A Tool to Detect Suspicious Emails</h3>
+        <p>An overview of my phishing detection tool under development, designed for everyday users.</p>
+        <a href="posts/post-phishscanner.html">Read more →</a>
       </article>
 
-      <article class="blog-card">
-        <h3>Getting Started with Cybersecurity</h3>
-        <p>Introductory tips and resources for beginners interested in cybersecurity.</p>
-        <a href="posts/post-cybersecurity.html">Read more →</a>
-      </article>
-
-      <!-- Add more blog posts here -->
+      <!-- Add more blog cards here as needed -->
     </section>
   </main>
 
@@ -66,7 +57,9 @@
   // Sidebar toggle
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.querySelector('.sidebar-toggle');
     sidebar.classList.toggle('open');
+    toggleBtn.style.display = sidebar.classList.contains('open') ? 'none' : 'block';
   }
 
   // Light/Dark mode toggle
