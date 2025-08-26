@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Blog — Your Name</title>
+<title>Blog — Shakthi K</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
 <style>
-  /* Same styling as index, reuse later by extracting CSS to file if you want */
   :root {
     --bg: #0f1117;
     --text: #fff;
@@ -33,26 +32,20 @@
     display: flex;
     transition: background 0.3s, color 0.3s;
     min-height: 100vh;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-in forwards;
   }
 
-  body {
-  opacity: 0;
-  animation: fadeIn 0.6s ease-in forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
+  @keyframes fadeIn {
+    to { opacity: 1; }
   }
-}
 
   html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* adjust if needed */
-}
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* adjust if needed */
+  }
 
-  
-
+  /* Sidebar */
   .sidebar {
     position: fixed;
     top: 0;
@@ -62,39 +55,28 @@
     background: var(--card);
     padding: 2rem 1.5rem;
     border-right: 1px solid #333;
-    transition: left 0.3s ease;
+    transition: left 0.3s ease, background 0.3s ease;
     z-index: 999;
     overflow-y: auto;
   }
   .sidebar.open {
     left: 0;
   }
+  .sidebar h3, .sidebar ul {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .sidebar.open h3,
+  .sidebar.open ul {
+    opacity: 1;
+    transform: translateY(0);
+  }
   .sidebar h3 {
     color: var(--accent);
     margin-top: 0;
     margin-bottom: 1rem;
   }
-  .sidebar.open ~ .sidebar-toggle {
-  display: none;
-}
-
-  .sidebar {
-  transition: left 0.3s ease, background 0.3s ease;
-}
-
-.sidebar h3, .sidebar ul {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.sidebar.open h3,
-.sidebar.open ul {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
   .sidebar ul {
     list-style: none;
     padding-left: 0;
@@ -111,6 +93,12 @@
     text-decoration: underline;
   }
 
+  /* Hide sidebar toggle button when sidebar is open */
+  .sidebar.open ~ .sidebar-toggle {
+    display: none;
+  }
+
+  /* Main content */
   main {
     flex: 1;
     max-width: 900px;
@@ -125,7 +113,6 @@
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
   }
-
   nav {
     text-align: center;
     margin-bottom: 2rem;
@@ -141,17 +128,18 @@
     text-decoration: underline;
   }
 
-  /* Blog card */
+  /* Blog cards */
   .blog-card {
     background: var(--card);
     padding: 1.5rem;
     border-radius: 10px;
     margin-bottom: 2rem;
-    box-shadow: 0 4px 8px rgb(60 130 255 / 0.15);
-    transition: transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(60,130,255,0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .blog-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
   }
   .blog-card h3 {
     margin-top: 0;
@@ -171,37 +159,7 @@
     text-decoration: underline;
   }
 
-  .blog-card {
-  background: var(--card);
-  padding: 1.5rem;
-  border-radius: 10px;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 8px rgba(60, 130, 255, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.blog-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-.blog-card h3 {
-  margin-top: 0;
-  color: var(--accent);
-}
-.blog-card p {
-  line-height: 1.4;
-}
-.blog-card a {
-  display: inline-block;
-  margin-top: 1rem;
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: 600;
-}
-.blog-card a:hover {
-  text-decoration: underline;
-}
-
-
+  /* Toggle buttons */
   button.toggle, button.sidebar-toggle {
     position: fixed;
     top: 15px;
@@ -255,12 +213,11 @@
 
     <nav role="navigation" aria-label="Blog navigation">
       <a href="index.html">Home</a>
-      <a href="blogs.html">Blog</a>
+      <a href="blogs.html" aria-current="page">Blog</a>
       <!-- <a href="projects.html">Projects</a> -->
     </nav>
 
     <section class="section blog-list" aria-label="List of blog posts">
-      <!-- Blog post card example -->
       <article class="blog-card" tabindex="0">
         <h3>PhishScanner Tool Release</h3>
         <p>A tool to detect phishing emails using heuristics and user input. Learn about its design and future plans.</p>
@@ -272,47 +229,35 @@
         <p>Exploring the risks of large models and how developers can build responsibly.</p>
         <a href="posts/post-aisafety.html">Read more →</a>
       </article>
-
-      <!-- Add more blog cards here -->
     </section>
   </main>
 
 <script>
-  // Same toggle scripts as index.html
+  // Toggle Sidebar open/close and hide toggle button accordingly
   function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.querySelector('.sidebar-toggle');
+    sidebar.classList.toggle('open');
+    toggleBtn.style.display = sidebar.classList.contains('open') ? 'none' : 'block';
   }
-  
-  function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  const toggleBtn = document.querySelector('.sidebar-toggle');
-  sidebar.classList.toggle('open');
-  if (sidebar.classList.contains('open')) {
-    toggleBtn.style.display = 'none';
-  } else {
-    toggleBtn.style.display = 'block';
-  }
-}
 
-  
+  // Toggle Light/Dark mode & save preference
   function toggleMode() {
     document.body.classList.toggle('light');
-    if(document.body.classList.contains('light')){
-      localStorage.setItem('theme', 'light');
-      document.querySelector('.toggle').textContent = '🌙';
-    } else {
-      localStorage.setItem('theme', 'dark');
-      document.querySelector('.toggle').textContent = '☀️';
-    }
+    const isLight = document.body.classList.contains('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    document.querySelector('.toggle').textContent = isLight ? '🌙' : '☀️';
   }
+
+  // Set theme on page load based on localStorage
   window.addEventListener('DOMContentLoaded', () => {
-    if(localStorage.getItem('theme') === 'light'){
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
       document.body.classList.add('light');
       document.querySelector('.toggle').textContent = '🌙';
     } else {
       document.querySelector('.toggle').textContent = '☀️';
     }
-    
   });
 </script>
 </body>
