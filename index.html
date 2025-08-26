@@ -100,6 +100,7 @@
       cursor: pointer;
       font-size: 0.85rem;
       transition: background 0.3s ease;
+      z-index: 1000;
     }
 
     .toggle:hover {
@@ -107,36 +108,61 @@
       color: var(--bg);
     }
 
-    /* 📚 Sidebar */
-    aside {
+    /* ⚙️ Sidebar (toggleable) */
+    .sidebar-toggle {
+      position: fixed;
+      top: 15px;
+      left: 20px;
+      background: none;
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      padding: 5px 10px;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar {
+      position: fixed;
+      left: -260px;
+      top: 0;
+      height: 100%;
       width: 250px;
       background: var(--card);
       padding: 2rem 1rem;
-      border-left: 1px solid #333;
+      border-right: 1px solid #333;
+      transition: left 0.3s ease;
+      z-index: 999;
     }
 
-    aside h3 {
+    .sidebar.open {
+      left: 0;
+    }
+
+    .sidebar h3 {
       font-size: 1.2rem;
       color: var(--accent);
       margin-bottom: 1rem;
     }
 
-    aside ul {
+    .sidebar ul {
       list-style: none;
       padding-left: 0;
       font-size: 0.95rem;
     }
 
-    aside ul li {
+    .sidebar ul li {
       margin-bottom: 0.8rem;
     }
 
-    aside ul li a {
+    .sidebar ul li a {
       color: var(--text);
       text-decoration: none;
     }
 
-    aside ul li a:hover {
+    .sidebar ul li a:hover {
       text-decoration: underline;
     }
 
@@ -145,17 +171,33 @@
         flex-direction: column;
       }
 
-      aside {
+      .sidebar {
         width: 100%;
-        border-left: none;
-        border-top: 1px solid #333;
+        height: auto;
+        position: absolute;
+        top: 50px;
+        left: -100%;
+      }
+
+      .sidebar.open {
+        left: 0;
       }
     }
   </style>
 </head>
 
 <body>
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Menu</button>
   <button class="toggle" onclick="toggleMode()">Toggle Theme</button>
+
+  <div class="sidebar" id="sidebar">
+    <h3>⚙️ Settings & Updates</h3>
+    <ul>
+      <li>Light/Dark Mode</li>
+      <li>Upcoming Features</li>
+      <li>Progress Tracker (Coming Soon)</li>
+    </ul>
+  </div>
 
   <main>
     <header>
@@ -185,31 +227,29 @@
       <p>PhishScanner — A tool that detects suspicious emails. Currently in development with a focus on user-friendly design.</p>
     </div>
 
+    <div class="section">
+      <h2>📚 Reading List</h2>
+      <ul>
+        <li><a href="https://intelligence.org/" target="_blank">MIRI: AI Safety</a></li>
+        <li><a href="https://www.cs50.harvard.edu/cybersecurity" target="_blank">CS50 Cybersecurity</a></li>
+        <li><a href="https://projecteuler.net/" target="_blank">Project Euler</a></li>
+        <li><a href="https://ncase.me/" target="_blank">Explorable Explanations</a></li>
+      </ul>
+    </div>
+
     <footer>
-      &copy; 2025 Your Name. All rights reserved.
+      &copy; 2025 Shakthi K. All rights reserved.
     </footer>
   </main>
-
-  <aside>
-    <h3>📚 Reading List</h3>
-    <ul>
-      <li><a href="https://intelligence.org/" target="_blank">MIRI: AI Safety</a></li>
-      <li><a href="https://www.cs50.harvard.edu/cybersecurity" target="_blank">CS50 Cybersecurity</a></li>
-      <li><a href="https://projecteuler.net/" target="_blank">Project Euler</a></li>
-      <li><a href="https://ncase.me/" target="_blank">Explorable Explanations</a></li>
-    </ul>
-
-    <h3>⚙️ Coming Soon</h3>
-    <ul>
-      <li>Hover tips & tool highlights</li>
-      <li>Typing animation?</li>
-      <li>Progress tracker</li>
-    </ul>
-  </aside>
 
   <script>
     function toggleMode() {
       document.body.classList.toggle("light");
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("open");
     }
   </script>
 </body>
