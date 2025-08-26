@@ -56,6 +56,11 @@
     z-index: 999;
     overflow-y: auto;
   }
+  
+  .sidebar.open {
+    padding-top: 80px;
+  }
+  
   .sidebar.open {
     left: 0;
   }
@@ -93,10 +98,6 @@
     text-decoration: underline;
   }
 
-  /* Hide sidebar toggle button when sidebar is open */
-  .sidebar.open ~ .sidebar-toggle {
-    display: none;
-  }
 
   /* ==== HEADER & MAIN ==== */
   main {
