@@ -327,12 +327,10 @@
   </main>
 
 <script>
-  // Toggle Sidebar open/close and hide toggle button accordingly
+  // Toggle Sidebar open/close - keep toggle button always visible
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.querySelector('.sidebar-toggle');
     sidebar.classList.toggle('open');
-    toggleBtn.style.display = sidebar.classList.contains('open') ? 'none' : 'block';
   }
 
   // Toggle Light/Dark mode & save preference
@@ -354,5 +352,6 @@
     }
   });
 </script>
+
 </body>
 </html>
