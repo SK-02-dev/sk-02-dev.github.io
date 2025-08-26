@@ -3,198 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Blog — Shakthi K</title>
+<title>Shakthi K — Blog</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f1117;
-    --text: #fff;
-    --accent: #3c82ff;
-    --card: #1c1e26;
-    --toggle-bg: #222;
-  }
-  body.light {
-    --bg: #f4f4f7;
-    --text: #111;
-    --accent: #3c82ff;
-    --card: #fff;
-    --toggle-bg: #ddd;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: 'JetBrains Mono', monospace;
-    background: var(--bg);
-    color: var(--text);
-    display: flex;
-    transition: background 0.3s, color 0.3s;
-    min-height: 100vh;
-    opacity: 0;
-    animation: fadeIn 0.6s ease-in forwards;
-  }
-
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
-
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px; /* adjust if needed */
-  }
-
-  /* Sidebar */
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: -260px;
-    width: 250px;
-    height: 100vh;
-    background: var(--card);
-    padding: 2rem 1.5rem;
-    border-right: 1px solid #333;
-    transition: left 0.3s ease, background 0.3s ease;
-    z-index: 999;
-    overflow-y: auto;
-  }
-
-  .sidebar.open {
-  padding-top: 80px;
-  }
-  .sidebar.open {
-    left: 0;
-  }
-  .sidebar h3, .sidebar ul {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  .sidebar.open h3,
-  .sidebar.open ul {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .sidebar h3 {
-    color: var(--accent);
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
-  .sidebar ul {
-    list-style: none;
-    padding-left: 0;
-    font-size: 0.95rem;
-  }
-  .sidebar ul li {
-    margin-bottom: 1rem;
-  }
-  .sidebar ul li a {
-    color: var(--text);
-    text-decoration: none;
-  }
-  .sidebar ul li a:hover {
-    text-decoration: underline;
-  }
-
-  /* Main content */
-  main {
-    flex: 1;
-    max-width: 900px;
-    margin: 3rem auto 3rem auto;
-    padding: 0 2rem;
-  }
-  header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-  nav {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  nav a {
-    margin: 0 1.2rem;
-    font-weight: bold;
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 1.1rem;
-  }
-  nav a:hover {
-    text-decoration: underline;
-  }
-
-  /* Blog cards */
-  .blog-card {
-    background: var(--card);
-    padding: 1.5rem;
-    border-radius: 10px;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 8px rgba(60,130,255,0.15);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .blog-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-  }
-  .blog-card h3 {
-    margin-top: 0;
-    color: var(--accent);
-  }
-  .blog-card p {
-    line-height: 1.4;
-  }
-  .blog-card a {
-    display: inline-block;
-    margin-top: 1rem;
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .blog-card a:hover {
-    text-decoration: underline;
-  }
-
-  /* Toggle buttons */
-  button.toggle, button.sidebar-toggle {
-    position: fixed;
-    top: 15px;
-    background: var(--toggle-bg);
-    border: 2px solid var(--accent);
-    color: var(--accent);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-family: 'JetBrains Mono', monospace;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-    z-index: 1001;
-  }
-  button.sidebar-toggle {
-    left: 20px;
-  }
-  button.toggle {
-    right: 20px;
-  }
-
-  @media (max-width: 768px) {
-    main {
-      margin: 5rem 1rem 3rem 1rem;
-      padding: 0 1rem;
-    }
-    nav a {
-      margin: 0 0.7rem;
-      font-size: 1rem;
-    }
-  }
-</style>
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Sidebar Toggle Button -->
   <button class="sidebar-toggle" aria-label="Toggle sidebar menu" onclick="toggleSidebar()">☰ Menu</button>
+
+  <!-- Light/Dark Mode Toggle Button -->
   <button class="toggle" aria-label="Toggle light/dark mode" onclick="toggleMode()">🌙</button>
 
+  <!-- Sidebar -->
   <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
     <h3>⚙️ Settings & Updates</h3>
     <ul>
@@ -206,38 +26,50 @@
 
   <main>
     <header>
-      <h1>Blog</h1>
-      <p>Latest articles, thoughts, and tutorials.</p>
+      <h1>Shakthi K</h1>
+      <p class="typed" aria-live="polite" aria-atomic="true">Developer • Cybersecurity • AI • Code</p>
     </header>
 
-    <nav role="navigation" aria-label="Blog navigation">
+    <nav role="navigation" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="blogs.html" aria-current="page">Blog</a>
+      <!-- <a href="projects.html">Projects</a> Uncomment when ready -->
     </nav>
 
-    <section class="section blog-list" aria-label="List of blog posts">
-      <article class="blog-card" tabindex="0">
-        <h3>PhishScanner Tool Release</h3>
-        <p>A tool to detect phishing emails using heuristics and user input. Learn about its design and future plans.</p>
-        <a href="posts/post-phishscanner.html">Read more →</a>
-      </article>
+    <section class="section blog-list" id="blog-list">
+      <h2>📝 Blog Posts</h2>
 
-      <article class="blog-card" tabindex="0">
+      <!-- Blog Post Card -->
+      <article class="blog-card">
         <h3>AI Safety: Why It Matters</h3>
         <p>Exploring the risks of large models and how developers can build responsibly.</p>
         <a href="posts/post-aisafety.html">Read more →</a>
       </article>
+
+      <article class="blog-card">
+        <h3>Understanding Phishing Scams</h3>
+        <p>A deep dive into common phishing techniques and how to protect yourself.</p>
+        <a href="posts/post-phishing.html">Read more →</a>
+      </article>
+
+      <article class="blog-card">
+        <h3>Getting Started with Cybersecurity</h3>
+        <p>Introductory tips and resources for beginners interested in cybersecurity.</p>
+        <a href="posts/post-cybersecurity.html">Read more →</a>
+      </article>
+
+      <!-- Add more blog posts here -->
     </section>
   </main>
 
 <script>
-  // Toggle Sidebar open/close — keep the toggle button always visible
+  // Sidebar toggle
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('open');
   }
 
-  // Toggle Light/Dark mode & save preference in localStorage
+  // Light/Dark mode toggle
   function toggleMode() {
     document.body.classList.toggle('light');
     const isLight = document.body.classList.contains('light');
@@ -245,7 +77,7 @@
     document.querySelector('.toggle').textContent = isLight ? '🌙' : '☀️';
   }
 
-  // On page load, apply saved theme preference
+  // Load theme from localStorage
   window.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
@@ -256,6 +88,5 @@
     }
   });
 </script>
-
 </body>
 </html>
