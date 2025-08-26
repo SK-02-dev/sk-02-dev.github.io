@@ -1,16 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
-  <title>My Blogs</title>
+  <title>Your Name — Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-light: #f5f5f5;
+      --text-light: #222;
+      --card-light: #fff;
+      --accent-light: #007acc;
+
+      --bg-dark: #0f1117;
+      --text-dark: #eee;
+      --card-dark: #1c1e26;
+      --accent-dark: #00ffe1;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background 0.3s, color 0.3s;
+      line-height: 1.6;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 1rem 1.5rem 3rem;
+    }
+
+    .light-mode {
+      background: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    nav {
+      background: var(--card-dark);
+      padding: 1rem;
+      text-align: center;
+      border-radius: 8px;
+      margin: 2rem 0 3rem;
+      transition: background 0.3s;
+    }
+
+    .light-mode nav {
+      background: var(--card-light);
+    }
+
+    nav a {
+      margin: 0 20px;
+      color: var(--accent-dark);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    .light-mode nav a {
+      color: var(--accent-light);
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    header {
+      text-align: center;
+      padding-top: 2rem;
+    }
+
+    header h1 {
+      margin-bottom: 0.3rem;
+      font-size: 2.8rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #888;
+      transition: color 0.3s;
+    }
+
+    .light-mode header p {
+      color: #555;
+    }
+
+    .toggle-btn {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      background: var(--accent-dark);
+      color: #000;
+      border-radius: 20px;
+      border: none;
+      font-size: 1rem;
+      transition: background 0.3s;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    .light-mode .toggle-btn {
+      background: var(--accent-light);
+      color: #fff;
+    }
+
+    .blogs-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+
+    .blog-card {
+      background: var(--card-dark);
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: background 0.3s, box-shadow 0.3s;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .light-mode .blog-card {
+      background: var(--card-light);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .blog-card:hover {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      background: var(--accent-dark);
+      color: #000;
+    }
+
+    .light-mode .blog-card:hover {
+      background: var(--accent-light);
+      color: #fff;
+    }
+
+    .blog-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .blog-excerpt {
+      flex-grow: 1;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .read-more {
+      font-weight: 700;
+      color: inherit;
+      text-decoration: none;
+      align-self: flex-start;
+      transition: text-decoration 0.3s;
+    }
+
+    .read-more:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #666;
+      transition: color 0.3s;
+    }
+
+    .light-mode footer {
+      color: #444;
+    }
+
+    /* Smooth fade in for cards */
+    .blog-card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s forwards;
+    }
+
+    .blog-card:nth-child(1) { animation-delay: 0.2s; }
+    .blog-card:nth-child(2) { animation-delay: 0.4s; }
+    .blog-card:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
   <nav>
-    <a href="index.html">Home</a> |
-    <a href="blogs.html">Blogs</a> |
+    <a href="index.html">Home</a>
+    <a href="blogs.html">Blog</a>
   </nav>
-  <hr />
-  <h1>Blog Posts</h1>
-  <p>Here’s where I’ll share my blogs about projects and AI safety.</p>
+
+  <header>
+    <h1>My Blogs</h1>
+    <p>Thoughts, projects, and reflections on coding and AI safety.</p>
+    <button class="toggle-btn" id="toggleBtn">Switch to Light Mode</button>
+  </header>
+
+  <main class="blogs-container">
+    <article class="blog-card">
+      <h2 class="blog-title">🚀 Project Plan for My Phish Scanner</h2>
+      <p class="blog-excerpt">Step-by-step breakdown of how I'm designing a phishing detection tool using Windows Forms and cybersecurity best practices.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+    <article class="blog-card">
+      <h2 class="blog-title">🤖 Why AI Safety Matters</h2>
+      <p class="blog-excerpt">Exploring the risks and responsibilities around AI development in large models, and what we can do as developers.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+
+    <article class="blog-card">
+      <h2 class="blog-title">💡 Learning Cybersecurity Basics</h2>
+      <p class="blog-excerpt">My journey through online modules, challenges, and hands-on practice in cybersecurity fundamentals.</p>
+      <a href="#" class="read-more">Read more →</a>
+    </article>
+  </main>
+
+  <footer>
+    &copy; 2025 Your Name. All rights reserved.
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const body = document.body;
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('light-mode');
+      if (body.classList.contains('light-mode')) {
+        toggleBtn.textContent = 'Switch to Dark Mode';
+      } else {
+        toggleBtn.textContent = 'Switch to Light Mode';
+      }
+    });
+  </script>
 </body>
 </html>
