@@ -1,249 +1,235 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Your Name — Blogs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg-light: #f5f5f5;
-      --text-light: #222;
-      --card-light: #fff;
-      --accent-light: #007acc;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blog — Your Name</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+<style>
+  /* Same styling as index, reuse later by extracting CSS to file if you want */
+  :root {
+    --bg: #0f1117;
+    --text: #fff;
+    --accent: #3c82ff;
+    --card: #1c1e26;
+    --toggle-bg: #222;
+  }
+  body.light {
+    --bg: #f4f4f7;
+    --text: #111;
+    --accent: #3c82ff;
+    --card: #fff;
+    --toggle-bg: #ddd;
+  }
 
-      --bg-dark: #0f1117;
-      --text-dark: #eee;
-      --card-dark: #1c1e26;
-      --accent-dark: #00ffe1;
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 250px;
+    height: 100vh;
+    background: var(--card);
+    padding: 2rem 1.5rem;
+    border-right: 1px solid #333;
+    transition: left 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+  }
+  .sidebar.open {
+    left: 0;
+  }
+  .sidebar h3 {
+    color: var(--accent);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  .sidebar ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.95rem;
+  }
+  .sidebar ul li {
+    margin-bottom: 1rem;
+  }
+  .sidebar ul li a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .sidebar ul li a:hover {
+    text-decoration: underline;
+  }
+
+  main {
+    flex: 1;
+    max-width: 900px;
+    margin: 3rem auto 3rem auto;
+    padding: 0 2rem;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  nav {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  nav a {
+    margin: 0 1.2rem;
+    font-weight: bold;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  /* Blog card */
+  .blog-card {
+    background: var(--card);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 8px rgb(60 130 255 / 0.15);
+    transition: transform 0.2s ease;
+  }
+  .blog-card:hover {
+    transform: translateY(-5px);
+  }
+  .blog-card h3 {
+    margin-top: 0;
+    color: var(--accent);
+  }
+  .blog-card p {
+    line-height: 1.4;
+  }
+  .blog-card a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .blog-card a:hover {
+    text-decoration: underline;
+  }
+
+  button.toggle, button.sidebar-toggle {
+    position: fixed;
+    top: 15px;
+    background: var(--toggle-bg);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    z-index: 1001;
+  }
+  button.sidebar-toggle {
+    left: 20px;
+  }
+  button.toggle {
+    right: 20px;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      margin: 5rem 1rem 3rem 1rem;
+      padding: 0 1rem;
     }
-
-    body {
-      margin: 0;
-      font-family: 'JetBrains Mono', monospace;
-      background: var(--bg-dark);
-      color: var(--text-dark);
-      transition: background 0.3s, color 0.3s;
-      line-height: 1.6;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 1rem 1.5rem 3rem;
-    }
-
-    .light-mode {
-      background: var(--bg-light);
-      color: var(--text-light);
-    }
-
-    nav {
-      background: var(--card-dark);
-      padding: 1rem;
-      text-align: center;
-      border-radius: 8px;
-      margin: 2rem 0 3rem;
-      transition: background 0.3s;
-    }
-
-    .light-mode nav {
-      background: var(--card-light);
-    }
-
     nav a {
-      margin: 0 20px;
-      color: var(--accent-dark);
-      font-weight: 700;
-      text-decoration: none;
-      font-size: 1.1rem;
-      transition: color 0.3s;
-    }
-
-    .light-mode nav a {
-      color: var(--accent-light);
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    header {
-      text-align: center;
-      padding-top: 2rem;
-    }
-
-    header h1 {
-      margin-bottom: 0.3rem;
-      font-size: 2.8rem;
-    }
-
-    header p {
-      font-size: 1.1rem;
-      color: #888;
-      transition: color 0.3s;
-    }
-
-    .light-mode header p {
-      color: #555;
-    }
-
-    .toggle-btn {
-      cursor: pointer;
-      padding: 0.5rem 1rem;
-      font-weight: 600;
-      background: var(--accent-dark);
-      color: #000;
-      border-radius: 20px;
-      border: none;
+      margin: 0 0.7rem;
       font-size: 1rem;
-      transition: background 0.3s;
-      margin-top: 1rem;
-      display: inline-block;
     }
-
-    .light-mode .toggle-btn {
-      background: var(--accent-light);
-      color: #fff;
-    }
-
-    .blogs-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 20px;
-      margin-top: 2rem;
-    }
-
-    .blog-card {
-      background: var(--card-dark);
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: background 0.3s, box-shadow 0.3s;
-      cursor: default;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .light-mode .blog-card {
-      background: var(--card-light);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .blog-card:hover {
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      background: var(--accent-dark);
-      color: #000;
-    }
-
-    .light-mode .blog-card:hover {
-      background: var(--accent-light);
-      color: #fff;
-    }
-
-    .blog-title {
-      font-size: 1.4rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .blog-excerpt {
-      flex-grow: 1;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      line-height: 1.4;
-    }
-
-    .read-more {
-      font-weight: 700;
-      color: inherit;
-      text-decoration: none;
-      align-self: flex-start;
-      transition: text-decoration 0.3s;
-    }
-
-    .read-more:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #666;
-      transition: color 0.3s;
-    }
-
-    .light-mode footer {
-      color: #444;
-    }
-
-    /* Smooth fade in for cards */
-    .blog-card {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.5s forwards;
-    }
-
-    .blog-card:nth-child(1) { animation-delay: 0.2s; }
-    .blog-card:nth-child(2) { animation-delay: 0.4s; }
-    .blog-card:nth-child(3) { animation-delay: 0.6s; }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="blogs.html">Blog</a>
-  </nav>
+  <button class="sidebar-toggle" aria-label="Toggle sidebar menu" onclick="toggleSidebar()">☰ Menu</button>
+  <button class="toggle" aria-label="Toggle light/dark mode" onclick="toggleMode()">🌙</button>
 
-  <header>
-    <h1>My Blogs</h1>
-    <p>Thoughts, projects, and reflections on coding and AI safety.</p>
-    <button class="toggle-btn" id="toggleBtn">Switch to Light Mode</button>
-  </header>
+  <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
+    <h3>⚙️ Settings & Updates</h3>
+    <ul>
+      <li><strong>Light/Dark Mode:</strong> Smooth transition & remembers choice</li>
+      <li><strong>Upcoming Features:</strong> Project tracker, demos & more</li>
+      <li><strong>Progress:</strong> Building AI safety blog and tools</li>
+    </ul>
+  </aside>
 
-  <main class="blogs-container">
-    <article class="blog-card">
-      <h2 class="blog-title">🚀 Project Plan for My Phish Scanner</h2>
-      <p class="blog-excerpt">Step-by-step breakdown of how I'm designing a phishing detection tool using Windows Forms and cybersecurity best practices.</p>
-      <a href="#" class="read-more">Read more →</a>
-    </article>
+  <main>
+    <header>
+      <h1>Blog</h1>
+      <p>Latest articles, thoughts, and tutorials.</p>
+    </header>
 
-    <article class="blog-card">
-      <h2 class="blog-title">🤖 Why AI Safety Matters</h2>
-      <p class="blog-excerpt">Exploring the risks and responsibilities around AI development in large models, and what we can do as developers.</p>
-      <a href="#" class="read-more">Read more →</a>
-    </article>
+    <nav role="navigation" aria-label="Blog navigation">
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blog</a>
+      <!-- <a href="projects.html">Projects</a> -->
+    </nav>
 
-    <article class="blog-card">
-      <h2 class="blog-title">💡 Learning Cybersecurity Basics</h2>
-      <p class="blog-excerpt">My journey through online modules, challenges, and hands-on practice in cybersecurity fundamentals.</p>
-      <a href="#" class="read-more">Read more →</a>
-    </article>
+    <section class="section blog-list" aria-label="List of blog posts">
+      <!-- Blog post card example -->
+      <article class="blog-card" tabindex="0">
+        <h3>PhishScanner Tool Release</h3>
+        <p>A tool to detect phishing emails using heuristics and user input. Learn about its design and future plans.</p>
+        <a href="posts/post-phishscanner.html">Read more →</a>
+      </article>
+
+      <article class="blog-card" tabindex="0">
+        <h3>AI Safety: Why It Matters</h3>
+        <p>Exploring the risks of large models and how developers can build responsibly.</p>
+        <a href="posts/post-aisafety.html">Read more →</a>
+      </article>
+
+      <!-- Add more blog cards here -->
+    </section>
   </main>
 
-  <footer>
-    &copy; 2025 Your Name. All rights reserved.
-  </footer>
-
-  <script>
-    const toggleBtn = document.getElementById('toggleBtn');
-    const body = document.body;
-
-    toggleBtn.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      if (body.classList.contains('light-mode')) {
-        toggleBtn.textContent = 'Switch to Dark Mode';
-      } else {
-        toggleBtn.textContent = 'Switch to Light Mode';
-      }
-    });
-  </script>
+<script>
+  // Same toggle scripts as index.html
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+  function toggleMode() {
+    document.body.classList.toggle('light');
+    if(document.body.classList.contains('light')){
+      localStorage.setItem('theme', 'light');
+      document.querySelector('.toggle').textContent = '🌙';
+    } else {
+      localStorage.setItem('theme', 'dark');
+      document.querySelector('.toggle').textContent = '☀️';
+    }
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    if(localStorage.getItem('theme') === 'light'){
+      document.body.classList.add('light');
+      document.querySelector('.toggle').textContent = '🌙';
+    } else {
+      document.querySelector('.toggle').textContent = '☀️';
+    }
+  });
+</script>
 </body>
 </html>
