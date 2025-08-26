@@ -3,173 +3,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PhishScanner — Blog Post</title>
+<title>PhishScanner — Shakthi K Blog</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --bg: #0f1117;
-    --text: #fff;
-    --accent: #3c82ff;
-    --card: #1c1e26;
-    --toggle-bg: #222;
-  }
-  body.light {
-    --bg: #f4f4f7;
-    --text: #111;
-    --accent: #3c82ff;
-    --card: #fff;
-    --toggle-bg: #ddd;
-  }
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: 'JetBrains Mono', monospace;
-    background: var(--bg);
-    color: var(--text);
-    display: flex;
-    transition: background 0.3s, color 0.3s;
-    min-height: 100vh;
-    opacity: 0;
-    animation: fadeIn 0.6s ease-in forwards;
-  }
-
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
-  }
-
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px;
-  }
-
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: -260px;
-    width: 250px;
-    height: 100vh;
-    background: var(--card);
-    padding: 2rem 1.5rem;
-    border-right: 1px solid #333;
-    transition: left 0.3s ease, background 0.3s ease;
-    z-index: 999;
-    overflow-y: auto;
-  }
-
-  .sidebar.open {
-  padding-top: 80px;
-  }
-  
-  .sidebar.open {
-    left: 0;
-  }
-  .sidebar h3 {
-    color: var(--accent);
-    margin-top: 0;
-    margin-bottom: 1rem;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  .sidebar ul {
-    list-style: none;
-    padding-left: 0;
-    font-size: 0.95rem;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  .sidebar.open h3,
-  .sidebar.open ul {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .sidebar ul li {
-    margin-bottom: 1rem;
-  }
-  .sidebar ul li a {
-    color: var(--text);
-    text-decoration: none;
-  }
-  .sidebar ul li a:hover {
-    text-decoration: underline;
-  }
-
-  main {
-    flex: 1;
-    max-width: 700px;
-    margin: 3rem auto 3rem auto;
-    padding: 0 2rem;
-  }
-  header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    color: var(--accent);
-  }
-  nav {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  nav a {
-    margin: 0 1.2rem;
-    font-weight: bold;
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 1.1rem;
-  }
-  nav a:hover {
-    text-decoration: underline;
-  }
-  img.project-image {
-    max-width: 100%;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-  }
-
-  button.toggle, button.sidebar-toggle {
-    position: fixed;
-    top: 15px;
-    background: var(--toggle-bg);
-    border: 2px solid var(--accent);
-    color: var(--accent);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-family: 'JetBrains Mono', monospace;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-    z-index: 1001;
-  }
-  button.sidebar-toggle {
-    left: 20px;
-  }
-  button.toggle {
-    right: 20px;
-  }
-
-  @media (max-width: 768px) {
-    main {
-      margin: 5rem 1rem 3rem 1rem;
-      padding: 0 1rem;
-    }
-    nav a {
-      margin: 0 0.7rem;
-      font-size: 1rem;
-    }
-  }
-</style>
+<link rel="stylesheet" href="../styles.css" />
 </head>
 <body>
+  <!-- Sidebar Toggle Button -->
   <button class="sidebar-toggle" aria-label="Toggle sidebar menu" onclick="toggleSidebar()">☰ Menu</button>
+
+  <!-- Light/Dark Mode Toggle Button -->
   <button class="toggle" aria-label="Toggle light/dark mode" onclick="toggleMode()">🌙</button>
 
+  <!-- Sidebar -->
   <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
     <h3>⚙️ Settings & Updates</h3>
     <ul>
@@ -181,53 +26,59 @@
 
   <main>
     <header>
-      <h1>PhishScanner Tool Release</h1>
-      <p>A tool to detect phishing emails using heuristics and user input. Learn about its design and future plans.</p>
+      <h1>PhishScanner: A Tool to Detect Suspicious Emails</h1>
+      <p>By Shakthi K • August 2025</p>
     </header>
 
-    <nav role="navigation" aria-label="Blog navigation">
+    <nav role="navigation" aria-label="Main navigation">
       <a href="../index.html">Home</a>
       <a href="../blogs.html">Blog</a>
-      <!-- Add other links if needed -->
     </nav>
 
-    <article>
-      <img src="../assets/phishscanner-screenshot.png" alt="Screenshot of PhishScanner tool" class="project-image" />
+    <article class="section blog-post">
       <p>
-        PhishScanner is designed to help identify phishing emails by analyzing content heuristics and user feedback. It’s an ongoing project aiming to improve user security with AI-assisted detection.
+        PhishScanner is a project I’m developing to help users identify potentially dangerous phishing emails before they cause harm. The tool scans incoming emails for suspicious patterns, links, and attachments using machine learning techniques combined with heuristic rules.
+      </p>
+      <h2>Features</h2>
+      <ul>
+        <li><strong>Email Content Analysis:</strong> Scans email text for common phishing phrases and red flags.</li>
+        <li><strong>Link Verification:</strong> Checks URLs against known phishing databases and validates link safety.</li>
+        <li><strong>Attachment Scanning:</strong> Inspects attachments for malware signatures and suspicious formats.</li>
+        <li><strong>User-Friendly Interface:</strong> Designed to be accessible for all users, not just cybersecurity experts.</li>
+      </ul>
+      <h2>Development Status</h2>
+      <p>
+        The project is currently in active development. I’m working on integrating more advanced AI safety checks and improving detection accuracy. Upcoming updates will include real-time notifications and a browser extension.
+      </p>
+      <h2>Why It Matters</h2>
+      <p>
+        Phishing remains one of the top cyber threats worldwide, causing millions in damages every year. Tools like PhishScanner can empower everyday users to defend themselves by spotting threats early and avoiding costly mistakes.
       </p>
       <p>
-        Future plans include integrating machine learning models and expanding email client compatibility.
+        Stay tuned for updates and demos coming soon!
       </p>
-      <!-- Add more content as you wish -->
     </article>
   </main>
 
 <script>
+  // Sidebar toggle
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.querySelector('.sidebar-toggle');
     sidebar.classList.toggle('open');
-    if (sidebar.classList.contains('open')) {
-      toggleBtn.style.display = 'none';
-    } else {
-      toggleBtn.style.display = 'block';
-    }
   }
 
+  // Light/Dark mode toggle
   function toggleMode() {
     document.body.classList.toggle('light');
-    if(document.body.classList.contains('light')){
-      localStorage.setItem('theme', 'light');
-      document.querySelector('.toggle').textContent = '🌙';
-    } else {
-      localStorage.setItem('theme', 'dark');
-      document.querySelector('.toggle').textContent = '☀️';
-    }
+    const isLight = document.body.classList.contains('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    document.querySelector('.toggle').textContent = isLight ? '🌙' : '☀️';
   }
 
+  // Load theme from localStorage
   window.addEventListener('DOMContentLoaded', () => {
-    if(localStorage.getItem('theme') === 'light'){
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
       document.body.classList.add('light');
       document.querySelector('.toggle').textContent = '🌙';
     } else {
