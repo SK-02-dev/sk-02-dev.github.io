@@ -4,26 +4,42 @@
   <meta charset="UTF-8" />
   <title>Shakthi K — Developer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #0f1117;
       --text: #ffffffcc;
-      --accent: #00ffe1;
+      --accent: #3c82ff;
       --card: #1c1e26;
+    }
+
+    body.light {
+      --bg: #f4f4f7;
+      --text: #111;
+      --accent: #3c82ff;
+      --card: #ffffff;
     }
 
     body {
       margin: 0;
       padding: 0;
-      font-family: Consolas, "Courier New", Courier, monospace;
+      font-family: 'JetBrains Mono', monospace;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+      display: flex;
+    }
+
+    main {
+      flex: 1;
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     header {
       text-align: center;
-      padding: 4rem 2rem 2rem;
+      padding-bottom: 2rem;
     }
 
     header h1 {
@@ -33,13 +49,14 @@
 
     header p {
       font-size: 1.2rem;
-      color: #aaa;
+      color: var(--text);
     }
 
     nav {
       text-align: center;
       padding: 1rem;
       background: var(--card);
+      margin-bottom: 2rem;
     }
 
     nav a {
@@ -54,9 +71,7 @@
     }
 
     .section {
-      padding: 3rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
+      padding: 2rem 0;
       border-bottom: 1px solid #333;
     }
 
@@ -67,55 +82,135 @@
 
     footer {
       text-align: center;
-      padding: 2rem;
-      color: #555;
+      padding: 2rem 1rem;
+      color: #888;
       font-size: 0.9rem;
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
+    /* 🌙 Toggle Button */
+    .toggle {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      padding: 5px 10px;
+      color: var(--accent);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.3s ease;
+    }
+
+    .toggle:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* 📚 Sidebar */
+    aside {
+      width: 250px;
+      background: var(--card);
+      padding: 2rem 1rem;
+      border-left: 1px solid #333;
+    }
+
+    aside h3 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    aside ul {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.95rem;
+    }
+
+    aside ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    aside ul li a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    aside ul li a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 800px) {
+      body {
+        flex-direction: column;
       }
 
-      nav a {
-        display: block;
-        margin: 10px 0;
+      aside {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid #333;
       }
     }
   </style>
 </head>
+
 <body>
+  <button class="toggle" onclick="toggleMode()">Toggle Theme</button>
 
-  <header>
-    <h1>Shakthi K</h1>
-    <p>Developer • Cybersecurity • AI • Code</p>
-  </header>
+  <main>
+    <header>
+      <h1>Shakthi K</h1>
+      <p>Developer • Cybersecurity • AI • Code</p>
+    </header>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="blogs.html">Blog</a>
-  </nav>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blogs.html">Blog</a>
+    </nav>
 
-  <div class="section">
-    <h2>🧠 About Me</h2>
-    <p>I’m a student developer interested in cybersecurity, AI, and building smart tools. Currently working on a phishing scanner and learning about AI safety.</p>
-  </div>
+    <div class="section">
+      <h2>🧠 About Me</h2>
+      <p>I’m a student developer interested in cybersecurity, AI, and building smart tools. Currently working on a phishing scanner and learning about AI safety.</p>
+    </div>
 
-  <div class="section">
-    <h2>📌 Latest Blog</h2>
-    <p><strong>AI Safety: Why It Matters</strong><br>
-    Exploring the risks of large models and how developers can build responsibly.</p>
-    <p><a href="blogs.html" style="color: var(--accent);">Read more →</a></p>
-  </div>
+    <div class="section">
+      <h2>📌 Latest Blog</h2>
+      <p><strong>AI Safety: Why It Matters</strong><br>
+      Exploring the risks of large models and how developers can build responsibly.</p>
+      <p><a href="posts/post-aisafety.html" style="color: var(--accent);">Read more →</a></p>
+    </div>
 
-  <div class="section">
-    <h2>🧰 Tools I’m Building</h2>
-    <p>PhishScanner — A tool that detects suspicious emails. Currently in development with a focus on user-friendly design.</p>
-  </div>
+    <div class="section">
+      <h2>🧰 Tools I’m Building</h2>
+      <p>PhishScanner — A tool that detects suspicious emails. Currently in development with a focus on user-friendly design.</p>
+    </div>
 
-  <footer>
-    &copy; 2025 Shakthi K. All rights reserved.
-  </footer>
+    <footer>
+      &copy; 2025 Your Name. All rights reserved.
+    </footer>
+  </main>
 
+  <aside>
+    <h3>📚 Reading List</h3>
+    <ul>
+      <li><a href="https://intelligence.org/" target="_blank">MIRI: AI Safety</a></li>
+      <li><a href="https://www.cs50.harvard.edu/cybersecurity" target="_blank">CS50 Cybersecurity</a></li>
+      <li><a href="https://projecteuler.net/" target="_blank">Project Euler</a></li>
+      <li><a href="https://ncase.me/" target="_blank">Explorable Explanations</a></li>
+    </ul>
+
+    <h3>⚙️ Coming Soon</h3>
+    <ul>
+      <li>Hover tips & tool highlights</li>
+      <li>Typing animation?</li>
+      <li>Progress tracker</li>
+    </ul>
+  </aside>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("light");
+    }
+  </script>
 </body>
 </html>
