@@ -1,256 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Shakthi K — Developer</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0f1117;
-      --text: #ffffffcc;
-      --accent: #3c82ff;
-      --card: #1c1e26;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Your Name — Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet" />
+<style>
+  /* ==== VARIABLES ==== */
+  :root {
+    --bg: #0f1117;
+    --text: #fff;
+    --accent: #3c82ff;
+    --card: #1c1e26;
+    --toggle-bg: #222;
+  }
+  body.light {
+    --bg: #f4f4f7;
+    --text: #111;
+    --accent: #3c82ff;
+    --card: #fff;
+    --toggle-bg: #ddd;
+  }
 
-    body.light {
-      --bg: #f4f4f7;
-      --text: #111;
-      --accent: #3c82ff;
-      --card: #ffffff;
-    }
+  /* ==== RESET ==== */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+  }
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'JetBrains Mono', monospace;
-      background: var(--bg);
-      color: var(--text);
-      transition: background 0.3s ease, color 0.3s ease;
-      display: flex;
-    }
+  /* ==== SIDEBAR ==== */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 250px;
+    height: 100vh;
+    background: var(--card);
+    padding: 2rem 1.5rem;
+    border-right: 1px solid #333;
+    transition: left 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+  }
+  .sidebar.open {
+    left: 0;
+  }
+  .sidebar h3 {
+    color: var(--accent);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  .sidebar ul {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.95rem;
+  }
+  .sidebar ul li {
+    margin-bottom: 1rem;
+  }
+  .sidebar ul li a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .sidebar ul li a:hover {
+    text-decoration: underline;
+  }
 
+  /* ==== HEADER ==== */
+  main {
+    flex: 1;
+    max-width: 900px;
+    margin: 3rem auto 3rem auto;
+    padding: 0 2rem;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.2rem;
+  }
+  header p {
+    font-size: 1.2rem;
+    color: var(--text);
+    opacity: 0.8;
+    min-height: 1.5rem;
+  }
+
+  /* ==== NAV ==== */
+  nav {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  nav a {
+    margin: 0 1.2rem;
+    font-weight: bold;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  /* ==== SECTIONS ==== */
+  .section {
+    margin-bottom: 3rem;
+  }
+  .section h2 {
+    color: var(--accent);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.3rem;
+  }
+  .section p, .section ul {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .section ul {
+    padding-left: 1.4rem;
+  }
+
+  /* ==== READING LIST TOOLTIP ==== */
+  .reading-list li {
+    position: relative;
+    cursor: help;
+  }
+  .reading-list li:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translate(8px, -50%);
+    background: var(--accent);
+    color: var(--bg);
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* ==== TOGGLE BUTTONS ==== */
+  button.toggle, button.sidebar-toggle {
+    position: fixed;
+    top: 15px;
+    background: var(--toggle-bg);
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    z-index: 1001;
+  }
+  button.toggle:hover, button.sidebar-toggle:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  button.sidebar-toggle {
+    left: 20px;
+  }
+  button.toggle {
+    right: 20px;
+  }
+
+  /* ==== TYPO ANIMATION ==== */
+  .typed {
+    color: var(--accent);
+    font-weight: 700;
+    border-right: 2px solid var(--accent);
+    padding-right: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(30) forwards, blink 0.8s step-end infinite alternate;
+    max-width: 100%;
+  }
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  @keyframes blink {
+    50% { border-color: transparent }
+  }
+
+  /* ==== RESPONSIVE ==== */
+  @media (max-width: 768px) {
     main {
-      flex: 1;
-      padding: 3rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
+      margin: 5rem 1rem 3rem 1rem;
+      padding: 0 1rem;
     }
-
-    header {
-      text-align: center;
-      padding-bottom: 2rem;
-    }
-
-    header h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      color: var(--text);
-    }
-
-    nav {
-      text-align: center;
-      padding: 1rem;
-      background: var(--card);
-      margin-bottom: 2rem;
-    }
-
     nav a {
-      margin: 0 15px;
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: bold;
+      margin: 0 0.7rem;
+      font-size: 1rem;
     }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .section {
-      padding: 2rem 0;
-      border-bottom: 1px solid #333;
-    }
-
-    h2 {
-      color: var(--accent);
-      font-size: 1.6rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: #888;
-      font-size: 0.9rem;
-    }
-
-    /* 🌙 Toggle Button */
-    .toggle {
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      background: none;
-      border: 2px solid var(--accent);
-      border-radius: 20px;
-      padding: 5px 10px;
-      color: var(--accent);
-      cursor: pointer;
-      font-size: 0.85rem;
-      transition: background 0.3s ease;
-      z-index: 1000;
-    }
-
-    .toggle:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    /* ⚙️ Sidebar (toggleable) */
-    .sidebar-toggle {
-      position: fixed;
-      top: 15px;
-      left: 20px;
-      background: none;
-      border: 2px solid var(--accent);
-      border-radius: 20px;
-      padding: 5px 10px;
-      color: var(--accent);
-      cursor: pointer;
-      font-size: 0.85rem;
-      transition: background 0.3s ease;
-      z-index: 1000;
-    }
-
-    .sidebar {
-      position: fixed;
-      left: -260px;
-      top: 0;
-      height: 100%;
-      width: 250px;
-      background: var(--card);
-      padding: 2rem 1rem;
-      border-right: 1px solid #333;
-      transition: left 0.3s ease;
-      z-index: 999;
-    }
-
-    .sidebar.open {
-      left: 0;
-    }
-
-    .sidebar h3 {
-      font-size: 1.2rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-
-    .sidebar ul {
-      list-style: none;
-      padding-left: 0;
-      font-size: 0.95rem;
-    }
-
-    .sidebar ul li {
-      margin-bottom: 0.8rem;
-    }
-
-    .sidebar ul li a {
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .sidebar ul li a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 800px) {
-      body {
-        flex-direction: column;
-      }
-
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: absolute;
-        top: 50px;
-        left: -100%;
-      }
-
-      .sidebar.open {
-        left: 0;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
-
 <body>
-  <button class="sidebar-toggle" onclick="toggleSidebar()">☰ Menu</button>
-  <button class="toggle" onclick="toggleMode()">Toggle Theme</button>
+  <!-- Sidebar Toggle -->
+  <button class="sidebar-toggle" aria-label="Toggle sidebar menu" onclick="toggleSidebar()">☰ Menu</button>
 
-  <div class="sidebar" id="sidebar">
+  <!-- Light/Dark Mode Toggle -->
+  <button class="toggle" aria-label="Toggle light/dark mode" onclick="toggleMode()">🌙</button>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
     <h3>⚙️ Settings & Updates</h3>
     <ul>
-      <li>Light/Dark Mode</li>
-      <li>Upcoming Features</li>
-      <li>Progress Tracker (Coming Soon)</li>
+      <li><strong>Light/Dark Mode:</strong> Smooth transition & remembers choice</li>
+      <li><strong>Upcoming Features:</strong> Project tracker, demos & more</li>
+      <li><strong>Progress:</strong> Building AI safety blog and tools</li>
     </ul>
-  </div>
+  </aside>
 
+  <!-- Main Content -->
   <main>
     <header>
-      <h1>Shakthi K</h1>
-      <p>Developer • Cybersecurity • AI • Code</p>
+      <h1>Your Name</h1>
+      <p class="typed" aria-live="polite" aria-atomic="true">Developer • Cybersecurity • AI • Code</p>
     </header>
 
-    <nav>
+    <nav role="navigation" aria-label="Main navigation">
       <a href="index.html">Home</a>
       <a href="blogs.html">Blog</a>
+      <!-- <a href="projects.html">Projects</a> Uncomment if you add projects page -->
     </nav>
 
-    <div class="section">
+    <section class="section about-me" id="about">
       <h2>🧠 About Me</h2>
       <p>I’m a student developer interested in cybersecurity, AI, and building smart tools. Currently working on a phishing scanner and learning about AI safety.</p>
-    </div>
+    </section>
 
-    <div class="section">
+    <section class="section latest-blog" id="latest-blog">
       <h2>📌 Latest Blog</h2>
-      <p><strong>AI Safety: Why It Matters</strong><br>
-      Exploring the risks of large models and how developers can build responsibly.</p>
-      <p><a href="posts/post-aisafety.html" style="color: var(--accent);">Read more →</a></p>
-    </div>
+      <article>
+        <h3>AI Safety: Why It Matters</h3>
+        <p>Exploring the risks of large models and how developers can build responsibly.</p>
+        <a href="posts/post-aisafety.html" style="color: var(--accent);">Read more →</a>
+      </article>
+    </section>
 
-    <div class="section">
+    <section class="section tools" id="tools">
       <h2>🧰 Tools I’m Building</h2>
       <p>PhishScanner — A tool that detects suspicious emails. Currently in development with a focus on user-friendly design.</p>
-    </div>
+    </section>
 
-    <div class="section">
+    <section class="section reading-list" id="reading-list">
       <h2>📚 Reading List</h2>
       <ul>
-        <li><a href="https://intelligence.org/" target="_blank">MIRI: AI Safety</a></li>
-        <li><a href="https://www.cs50.harvard.edu/cybersecurity" target="_blank">CS50 Cybersecurity</a></li>
-        <li><a href="https://projecteuler.net/" target="_blank">Project Euler</a></li>
-        <li><a href="https://ncase.me/" target="_blank">Explorable Explanations</a></li>
+        <li data-tooltip="Machine Intelligence Research Institute, AI Safety Research">MIRI: AI Safety</li>
+        <li data-tooltip="Harvard's CS50 Intro to Cybersecurity course">CS50 Cybersecurity</li>
+        <li data-tooltip="Challenging programming and math problems">Project Euler</li>
+        <li data-tooltip="Interactive, educational explanations">Explorable Explanations</li>
       </ul>
-    </div>
-
-    <footer>
-      &copy; 2025 Shakthi K. All rights reserved.
-    </footer>
+    </section>
   </main>
 
-  <script>
-    function toggleMode() {
-      document.body.classList.toggle("light");
-    }
+<script>
+  // Toggle Sidebar open/close
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
 
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("open");
+  // Toggle Light/Dark mode & save to localStorage
+  function toggleMode() {
+    document.body.classList.toggle('light');
+    if(document.body.classList.contains('light')){
+      localStorage.setItem('theme', 'light');
+      document.querySelector('.toggle').textContent = '🌙';
+    } else {
+      localStorage.setItem('theme', 'dark');
+      document.querySelector('.toggle').textContent = '☀️';
     }
-  </script>
+  }
+
+  // On page load, set theme from localStorage
+  window.addEventListener('DOMContentLoaded', () => {
+    if(localStorage.getItem('theme') === 'light'){
+      document.body.classList.add('light');
+      document.querySelector('.toggle').textContent = '🌙';
+    } else {
+      document.querySelector('.toggle').textContent = '☀️';
+    }
+  });
+</script>
 </body>
 </html>
