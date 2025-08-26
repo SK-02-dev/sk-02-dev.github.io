@@ -231,15 +231,13 @@
   </main>
 
 <script>
-  // Toggle Sidebar open/close and hide toggle button accordingly
+  // Toggle Sidebar open/close — keep the toggle button always visible
   function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.querySelector('.sidebar-toggle');
     sidebar.classList.toggle('open');
-    toggleBtn.style.display = sidebar.classList.contains('open') ? 'none' : 'block';
   }
 
-  // Toggle Light/Dark mode & save preference
+  // Toggle Light/Dark mode & save preference in localStorage
   function toggleMode() {
     document.body.classList.toggle('light');
     const isLight = document.body.classList.contains('light');
@@ -247,7 +245,7 @@
     document.querySelector('.toggle').textContent = isLight ? '🌙' : '☀️';
   }
 
-  // Set theme on page load based on localStorage
+  // On page load, apply saved theme preference
   window.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
@@ -258,5 +256,6 @@
     }
   });
 </script>
+
 </body>
 </html>
