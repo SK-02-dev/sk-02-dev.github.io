@@ -30,7 +30,7 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
 }
-}
+
 @keyframes fadeIn {
   to { opacity: 1; }
 }
