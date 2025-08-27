@@ -252,36 +252,105 @@ button.toggle:hover, button.sidebar-toggle:hover {
   50% { border-color: transparent }
 }
 
-/* ==== BLOG CARD ==== */
+/* ==== BLOG CARD (Widget Style) ==== */
 .blog-card {
   background: var(--card);
-  padding: 1.5rem;
-  border-radius: 10px;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 8px rgba(60, 130, 255, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 2rem;
+  border-radius: 12px; /* slightly sharper corners */
+  margin-bottom: 2.5rem;
+  box-shadow: 0 8px 24px rgba(60, 130, 255, 0.1); /* softer but bigger shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .blog-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(60, 130, 255, 0.18);
+  border-color: var(--accent);
 }
 .blog-card h3 {
   margin-top: 0;
   color: var(--accent);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
 }
 .blog-card p {
-  line-height: 1.4;
+  line-height: 1.6;
+  flex-grow: 1;
+  color: var(--text);
+  font-size: 1rem;
 }
 .blog-card a {
-  display: inline-block;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
   color: var(--accent);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  align-self: flex-start;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
 }
 .blog-card a:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 4rem 2rem;
+}
+
+.widget-card {
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+.widget-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.widget-content {
+  padding: 1.5rem;
+}
+
+.widget-content h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.widget-content p {
+  margin: 0.8rem 0;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.widget-content a {
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.widget-content a:hover {
   text-decoration: underline;
 }
+
 
 /* ==== RESPONSIVE ==== */
 @media (max-width: 768px) {
