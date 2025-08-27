@@ -1,173 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Shakthi K — Developer Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shakthi K - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-   <!-- Light/Dark Mode Toggle Button -->
-  <button class="toggle" aria-label="Toggle light/dark mode" onclick="toggleMode()">🌙</button>
-
-  <!-- Sidebar Toggle Button (hidden initially) -->
-  <button class="sidebar-toggle" aria-label="Toggle sidebar menu" onclick="toggleSidebar()" style="display:none;">☰ Menu</button>
-
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
-    <h3>⚙️ Settings & Updates</h3>
+  <!-- Top Nav: Hidden on load, appears on scroll -->
+  <nav class="top-nav" aria-label="Primary navigation">
     <ul>
-      <li><strong>Light/Dark Mode:</strong> Smooth transition & remembers choice</li>
-      <li><strong>Upcoming Features:</strong> Project tracker, demos & more</li>
-      <li><strong>Progress:</strong> Building AI safety blog and tools</li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#latest-blog">Blog</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#reading-list">Reading List</a></li>
     </ul>
-  </aside>
+  </nav>
 
-  <!-- Main Content -->
+  <!-- Light/Dark toggle -->
+  <button class="toggle" aria-label="Toggle light and dark mode">🌓</button>
+
+  <!-- Hero Section (full viewport) -->
+  <section class="hero">
+    <h1 class="typed scroll-reveal">Shakthi K</h1>
+    <p class="scroll-reveal">Student developer exploring cybersecurity, AI, and smart tools.</p>
+    <div class="scroll-indicator" aria-hidden="true">⌄</div>
+  </section>
+
   <main>
-    <section class="hero">
-      <h1>Shakthi K</h1>
-      <p class="typed" aria-live="polite" aria-atomic="true">Developer • Cybersecurity • AI • Code</p>
-      <div class="scroll-indicator">▼</div>
+    <section class="section about-me scroll-reveal" id="about">
+      <h2>🧠 About Me</h2>
+      <p>I’m a student developer interested in cybersecurity, AI, and building smart tools. Currently working on a phishing scanner and learning about AI safety.</p>
     </section>
 
-    <header>
-      <h1>Shakthi K</h1>
-      <p class="typed" aria-live="polite" aria-atomic="true">Developer • Cybersecurity • AI • Code</p>
-    </header>
-
-    <nav role="navigation" aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="blogs.html">Blog</a>
-      <!-- <a href="projects.html">Projects</a> Uncomment when ready -->
-    </nav>
-
-    <section class="widget-grid">
-      <div class="widget-card">
-       <!-- <img src="images/phishscanner.png" alt="PhishScanner Tool" /> -->
-        <div class="widget-content">
-        <h3>PhishScanner</h3>
-        <p>A phishing email detection tool for everyday users.</p>
-        <a href="posts/post-phishscanner.html">Read More →</a>
-        </div>
-      </div>
-
-      <div class="widget-card">
-         <!-- <img src="images/aisafety.png" alt="AI Safety Blog" />  -->
-          <div class="widget-content">
-          <h3>Why AI Safety Matters</h3>
-          <p>How developers can build large models responsibly.</p>
-          <a href="posts/post-aisafety.html">Read More →</a>
-          </div>
-      </div>
-
-  <!-- Add more widgets as needed -->
-
-  <div class="widget-card">
-    <div class="widget-content">
-      <h3>🧠 About Me</h3>
-      <p>I’m a student developer interested in cybersecurity, AI, and building smart tools. Currently working on a phishing scanner and learning about AI safety.</p>
-    </div>
-  </div>
-
-  <div class="widget-card">
-    <div class="widget-content">
-      <h3>📌 Latest Blog</h3>
-      <article>
-        <h4>AI Safety: Why It Matters</h4>
+    <section class="section latest-blog scroll-reveal" id="latest-blog">
+      <h2>📌 Latest Blog</h2>
+      <article class="blog-card">
+        <h3>AI Safety: Why It Matters</h3>
         <p>Exploring the risks of large models and how developers can build responsibly.</p>
         <a href="posts/post-aisafety.html">Read more →</a>
       </article>
-    </div>
-  </div>
+    </section>
 
-  <div class="widget-card">
-    <div class="widget-content">
-      <h3>🧰 Tools I’m Building</h3>
+    <section class="section tools scroll-reveal" id="tools">
+      <h2>🧰 Tools I’m Building</h2>
       <p>PhishScanner — A tool that detects suspicious emails. Currently in development with a focus on user-friendly design.</p>
-    </div>
-  </div>
+    </section>
 
-  <div class="widget-card">
-  <div class="widget-content">
-    <h3>📚 Reading List</h3>
-    <ul>
-      <li><a href="https://intelligence.org/research/" target="_blank" rel="noopener noreferrer" title="Machine Intelligence Research Institute, AI Safety Research">MIRI: AI Safety</a></li>
-      <li><a href="https://cs50.harvard.edu/cybersecurity/" target="_blank" rel="noopener noreferrer" title="Harvard's CS50 Intro to Cybersecurity course">CS50 Cybersecurity</a></li>
-      <li><a href="https://projecteuler.net/" target="_blank" rel="noopener noreferrer" title="Challenging programming and math problems">Project Euler</a></li>
-      <li><a href="https://explorabl.es/" target="_blank" rel="noopener noreferrer" title="Interactive, educational explanations">Explorable Explanations</a></li>
-    </ul>
-  </div>
-</div>
-</section>
-
+    <section class="section reading-list scroll-reveal" id="reading-list">
+      <h2>📚 Reading List</h2>
+      <ul>
+        <li data-tooltip="Machine Intelligence Research Institute, AI Safety Research"><a href="https://intelligence.org" target="_blank" rel="noopener noreferrer">MIRI: AI Safety</a></li>
+        <li data-tooltip="Harvard's CS50 Intro to Cybersecurity course"><a href="https://cs50.harvard.edu/cybersecurity/" target="_blank" rel="noopener noreferrer">CS50 Cybersecurity</a></li>
+        <li data-tooltip="Challenging programming and math problems"><a href="https://projecteuler.net" target="_blank" rel="noopener noreferrer">Project Euler</a></li>
+        <li data-tooltip="Interactive, educational explanations"><a href="https://explorabl.es" target="_blank" rel="noopener noreferrer">Explorable Explanations</a></li>
+      </ul>
+    </section>
   </main>
 
-<script>
-  // Toggle Sidebar open/close and keep the menu button visible
-  function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.toggle('open');
-  }
+  <script>
+    // Scroll reveal fly-up animations
+    const scrollElements = document.querySelectorAll('.scroll-reveal');
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const elements = document.querySelectorAll('.scroll-reveal');
+    const elementInView = (el, offset = 150) => {
+      const elementTop = el.getBoundingClientRect().top;
+      return (
+        elementTop <=
+        (window.innerHeight || document.documentElement.clientHeight) - offset
+      );
+    };
 
-    function revealOnScroll() {
-      const trigger = window.innerHeight * 0.85;
-      elements.forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < trigger) {
-          el.classList.add('visible');
+    const displayScrollElement = (element) => {
+      element.classList.add('visible');
+    };
+
+    const hideScrollElement = (element) => {
+      element.classList.remove('visible');
+    };
+
+    const handleScrollAnimation = () => {
+      scrollElements.forEach((el) => {
+        if (elementInView(el, 150)) {
+          displayScrollElement(el);
+        } else {
+          hideScrollElement(el);
         }
       });
-    }
+    };
 
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Initial check
-  });
+    window.addEventListener('scroll', () => {
+      handleScrollAnimation();
 
-  document.addEventListener('DOMContentLoaded', () => {
-  const sections = document.querySelectorAll('main section');
-
-  sections.forEach(section => {
-    section.classList.add('scroll-reveal');
-  });
-
-  function revealOnScroll() {
-    const trigger = window.innerHeight * 0.85;
-    sections.forEach(el => {
-      const top = el.getBoundingClientRect().top;
-      if (top < trigger) {
-        el.classList.add('visible');
+      // Show/hide top nav after hero
+      const nav = document.querySelector('.top-nav');
+      const heroHeight = document.querySelector('.hero').offsetHeight;
+      if (window.scrollY > heroHeight - 80) {
+        nav.classList.add('visible');
+      } else {
+        nav.classList.remove('visible');
       }
     });
-  }
 
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll(); // Initial call
-});
+    // Initial check on page load
+    window.addEventListener('load', () => {
+      handleScrollAnimation();
+    });
 
+    // Light/Dark toggle
+    const toggleBtn = document.querySelector('.toggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      // Optional: store preference in localStorage here
+    });
 
-  // Toggle Light/Dark mode & save preference
-  function toggleMode() {
-    document.body.classList.toggle('light');
-    const isLight = document.body.classList.contains('light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    document.querySelector('.toggle').textContent = isLight ? '🌙' : '☀️';
-  }
-
-  // Set theme on page load based on localStorage
-  window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      document.body.classList.add('light');
-      document.querySelector('.toggle').textContent = '🌙';
-    } else {
-      document.querySelector('.toggle').textContent = '☀️';
+    // Typing effect for hero heading (simple)
+    const typedEl = document.querySelector('.typed');
+    const text = typedEl.textContent;
+    typedEl.textContent = '';
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        typedEl.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+      }
     }
-  });
-</script>
+    typeWriter();
+  </script>
 </body>
 </html>
