@@ -191,14 +191,13 @@ button.toggle:hover, button.sidebar-toggle:hover {
 
 /* ==== TYPO ANIMATION ==== */
 .typed {
-  color: var(--accent);
-  font-weight: 700;
-  border-right: 2px solid var(--accent);
-  padding-right: 5px;
-  white-space: nowrap;
+  display: inline-block;
   overflow: hidden;
-  animation: typing 3s steps(30) forwards, blink 0.8s step-end infinite alternate;
+  white-space: nowrap;
+  border-right: 2px solid var(--accent);
+  animation: typing 3s steps(40, end) forwards, blink 0.8s step-end infinite alternate;
   max-width: 100%;
+  width: 0; /* Ensure it animates from 0 */
 }
 @keyframes typing {
   from { width: 0 }
