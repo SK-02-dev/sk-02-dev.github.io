@@ -8,11 +8,11 @@
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Sidebar Toggle Button -->
-  <button class="sidebar-toggle" aria-label="Toggle sidebar menu" onclick="toggleSidebar()">☰ Menu</button>
-
-  <!-- Light/Dark Mode Toggle Button -->
+   <!-- Light/Dark Mode Toggle Button -->
   <button class="toggle" aria-label="Toggle light/dark mode" onclick="toggleMode()">🌙</button>
+
+  <!-- Sidebar Toggle Button (hidden initially) -->
+  <button class="sidebar-toggle" aria-label="Toggle sidebar menu" onclick="toggleSidebar()" style="display:none;">☰ Menu</button>
 
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
@@ -27,11 +27,9 @@
   <!-- Main Content -->
   <main>
     <section class="hero">
-      <div class="hero-content">
       <h1>Shakthi K</h1>
-      <p>Cybersecurity & AI Developer</p>
-      <a href="#about" class="cta-button">Explore ↓</a>
-      </div>
+      <p class="typed" aria-live="polite" aria-atomic="true">Developer • Cybersecurity • AI • Code</p>
+      <div class="scroll-indicator">▼</div>
     </section>
 
     <header>
