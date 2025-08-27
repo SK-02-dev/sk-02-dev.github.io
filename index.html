@@ -33,7 +33,7 @@
     <div class="widget-card">
       <img src="images/phishscanner.png" alt="PhishScanner Tool" />
       <div class="widget-content">
-        <h3>PhishScanner</h3>
+        <h3><span class="emoji-fly">🧰</span>Phishing Scanner</h3>
         <p>A phishing email detection tool for everyday users.</p>
         <a href="posts/post-phishscanner.html">Read More →</a>
       </div>
@@ -139,6 +139,22 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+  const flyingEmojis = document.querySelectorAll('.emoji-fly');
+
+const emojiObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, index * 120); // optional stagger
+      emojiObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+flyingEmojis.forEach(el => emojiObserver.observe(el));
+
 
   // Scroll reveal for `.scroll-reveal` elements
   const revealElements = document.querySelectorAll('.scroll-reveal');
