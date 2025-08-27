@@ -38,27 +38,22 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background: var(--card);
-  border-bottom: 1px solid #333;
-  padding: 0.75rem 2rem;
-  display: flex;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-100%);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  background: var(--bg);
+  padding: 1rem 2rem;
   z-index: 1000;
+  transform: translateY(-100%);
+  transition: transform 0.4s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .top-nav.visible {
-  opacity: 1;
-  pointer-events: auto;
   transform: translateY(0);
 }
 
 .top-nav ul {
   list-style: none;
   display: flex;
+  justify-content: center;
   gap: 2rem;
   margin: 0;
   padding: 0;
@@ -77,6 +72,7 @@ body {
   color: var(--text);
   border-bottom: 2px solid var(--accent);
 }
+
 
 /* ==== LIGHT/DARK TOGGLE BUTTON ==== */
 button.toggle {
@@ -103,16 +99,21 @@ button.toggle:hover {
 /* ==== HERO SECTION ==== */
 .hero {
   height: 100vh;
-  background: var(--bg);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 0 1rem;
-  position: relative;
+  background: var(--bg);
   color: var(--text);
-  overflow: hidden;
+  padding: 0 2rem;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  position: relative;
+  z-index: 10;
+}
+.hero.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
 }
 
 .hero h1 {
@@ -220,22 +221,35 @@ main {
   text-decoration: none;
 }
 
-
 .widget-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-  padding: 4rem 2rem;
 }
 
 .widget-card {
+  height: 100vh;
+  width: 100%;
   background: var(--card);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 4rem 2rem;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.widget-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.widget-content {
+  max-width: 800px;
+  text-align: center;
 }
 
 .widget-card:hover {
@@ -248,10 +262,6 @@ main {
   height: auto;
   object-fit: cover;
   display: block;
-}
-
-.widget-content {
-  padding: 1.5rem;
 }
 
 .widget-content h3 {
