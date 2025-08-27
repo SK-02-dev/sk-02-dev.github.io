@@ -100,78 +100,86 @@
   
 
   <script>
-let lastScrollTop = 0;
-const hero = document.querySelector('.hero');
-const nav = document.querySelector('.top-nav');
-const widgetCards = document.querySelectorAll('.widget-card');
+document.addEventListener("DOMContentLoaded", function () {
+  let lastScrollTop = 0;
+  const hero = document.querySelector('.hero');
+  const nav = document.querySelector('.top-nav');
+  const widgetCards = document.querySelectorAll('.widget-card');
 
-// Scroll handler
-function handleScroll() {
-  const scrollTop = window.scrollY;
-
-  // Hide hero when scrolling down
-  if (scrollTop > lastScrollTop && scrollTop > 100) {
-    hero.classList.add('hidden');
-    nav.classList.add('visible');
+  if (!hero || !nav) {
+    console.warn('Hero or nav not found');
+    return;
   }
 
-  // Show hero when scrolling up to top
-  if (scrollTop < lastScrollTop && scrollTop < hero.offsetHeight - 80) {
-    hero.classList.remove('hidden');
-    nav.classList.remove('visible');
+  // Scroll handler
+  function handleScroll() {
+    const scrollTop = window.scrollY;
+
+    // Hide hero when scrolling down
+    if (scrollTop > lastScrollTop && scrollTop > 100) {
+      hero.classList.add('hidden');
+      nav.classList.add('visible');
+    }
+
+    // Show hero when scrolling up to top
+    if (scrollTop < lastScrollTop && scrollTop < hero.offsetHeight - 80) {
+      hero.classList.remove('hidden');
+      nav.classList.remove('visible');
+    }
+
+    lastScrollTop = scrollTop;
+
+    // Reveal widget cards (fly up)
+    widgetCards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        card.classList.add('visible');
+      }
+    });
   }
 
-  lastScrollTop = scrollTop;
+  // Scroll reveal for `.scroll-reveal` elements
+  const revealElements = document.querySelectorAll('.scroll-reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
 
-  // Reveal widget cards (fly up)
-  widgetCards.forEach((card) => {
-    const rect = card.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100) {
-      card.classList.add('visible');
+  revealElements.forEach((el) => observer.observe(el));
+
+  // Light/Dark toggle
+  const toggleBtn = document.querySelector('.toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+    });
+  }
+
+  // Typing effect
+  const typedEl = document.querySelector('.typed');
+  if (typedEl) {
+    const text = typedEl.textContent;
+    typedEl.textContent = '';
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        typedEl.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+      }
     }
-  });
-}
+    typeWriter();
+  }
 
-// Scroll reveal for `.scroll-reveal` elements
-const revealElements = document.querySelectorAll('.scroll-reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, index) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.classList.add('visible');
-      }, index * 100);
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-
-revealElements.forEach((el) => observer.observe(el));
-
-// Light/Dark toggle
-const toggleBtn = document.querySelector('.toggle');
-toggleBtn.addEventListener('click', () => {
-  document.body.classList.toggle('light');
+  window.addEventListener('scroll', handleScroll);
 });
+</script>
 
-// Typing effect
-const typedEl = document.querySelector('.typed');
-if (typedEl) {
-  const text = typedEl.textContent;
-  typedEl.textContent = '';
-  let i = 0;
-  function typeWriter() {
-    if (i < text.length) {
-      typedEl.textContent += text.charAt(i);
-      i++;
-      setTimeout(typeWriter, 50);
-    }
-  }
-  typeWriter();
-}
-
-window.addEventListener('scroll', handleScroll);
-
-
-  </script>
 </body>
 </html>
