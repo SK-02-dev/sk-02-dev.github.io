@@ -157,6 +157,21 @@ button.toggle:hover {
   50% { transform: translateY(12px); }
 }
 
+.emoji-fly {
+  display: inline-block;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+  will-change: transform, opacity;
+}
+
+.emoji-fly.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+
 /* ==== MAIN CONTENT ==== */
 main {
   width: 100vw;
