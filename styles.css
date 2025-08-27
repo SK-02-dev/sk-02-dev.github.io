@@ -111,10 +111,14 @@ button.toggle:hover {
   position: relative;
   z-index: 10;
 }
+
 .hero.hidden {
-  transform: translateY(-100%);
   opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition: all 0.6s ease;
 }
+
 
 .hero h1 {
   font-size: 3.5rem;
