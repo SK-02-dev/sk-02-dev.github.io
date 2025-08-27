@@ -82,6 +82,45 @@
     sidebar.classList.toggle('open');
   }
 
+  document.addEventListener('DOMContentLoaded', () => {
+    const elements = document.querySelectorAll('.scroll-reveal');
+
+    function revealOnScroll() {
+      const trigger = window.innerHeight * 0.85;
+      elements.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < trigger) {
+          el.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Initial check
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+  const sections = document.querySelectorAll('main section');
+
+  sections.forEach(section => {
+    section.classList.add('scroll-reveal');
+  });
+
+  function revealOnScroll() {
+    const trigger = window.innerHeight * 0.85;
+    sections.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < trigger) {
+        el.classList.add('visible');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', revealOnScroll);
+  revealOnScroll(); // Initial call
+});
+
+
   // Toggle Light/Dark mode & save preference
   function toggleMode() {
     document.body.classList.toggle('light');
