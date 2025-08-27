@@ -96,74 +96,59 @@
     </section> -->
   </main>
 
+
+  
+
   <script>
-    // Scroll reveal fly-up animations
-    const scrollElements = document.querySelectorAll('.scroll-reveal');
+    const revealElements = document.querySelectorAll('.scroll-reveal');
 
-    const elementInView = (el, offset = 150) => {
-      const elementTop = el.getBoundingClientRect().top;
-      return (
-        elementTop <=
-        (window.innerHeight || document.documentElement.clientHeight) - offset
-      );
-    };
-
-    const displayScrollElement = (element) => {
-      element.classList.add('visible');
-    };
-
-    const hideScrollElement = (element) => {
-      element.classList.remove('visible');
-    };
-
-    const handleScrollAnimation = () => {
-      scrollElements.forEach((el) => {
-        if (elementInView(el, 150)) {
-          displayScrollElement(el);
-        } else {
-          hideScrollElement(el);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 150); // stagger delay per element
+          observer.unobserve(entry.target); // only reveal once
         }
       });
-    };
+    }, { threshold: 0.1 });
 
+    revealElements.forEach(el => observer.observe(el));
+    
+    // Show/hide top nav after hero scroll
+    const nav = document.querySelector('.top-nav');
+    const hero = document.querySelector('.hero');
     window.addEventListener('scroll', () => {
-      handleScrollAnimation();
-
-      // Show/hide top nav after hero
-      const nav = document.querySelector('.top-nav');
-      const heroHeight = document.querySelector('.hero').offsetHeight;
-      if (window.scrollY > heroHeight - 80) {
+      if (window.scrollY > hero.offsetHeight - 80) {
         nav.classList.add('visible');
       } else {
         nav.classList.remove('visible');
       }
     });
-
-    // Initial check on page load
-    window.addEventListener('load', () => {
-      handleScrollAnimation();
-    });
-
+    
     // Light/Dark toggle
     const toggleBtn = document.querySelector('.toggle');
     toggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('light');
       // Optional: store preference in localStorage here
     });
-
+    
     // Typing effect for hero heading (simple)
     const typedEl = document.querySelector('.typed');
-    const text = typedEl.textContent;
-    typedEl.textContent = '';
-    let i = 0;
-    function typeWriter() {
-      if (i < text.length) {
-        typedEl.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 50);
+    if (typedEl) {
+      const text = typedEl.textContent;
+      typedEl.textContent = '';
+      let i = 0;
+      function typeWriter() {
+        if (i < text.length) {
+          typedEl.textContent += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50);
+        }
       }
+      typeWriter();
     }
-    typeWriter();
+
   </script>
 </body>
 </html>
