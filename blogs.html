@@ -1,109 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Blog — Shakthi K</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog — Shakthi K</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
+  
 <body>
-  <!-- Sidebar Toggle Button -->
-  <button class="sidebar-toggle" aria-label="Toggle sidebar menu" onclick="toggleSidebar()">☰ Menu</button>
-
-  <!-- Light/Dark Mode Toggle Button -->
-  <button class="toggle" aria-label="Toggle light and dark mode">🌓</button>
-
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
-    <h3>⚙️ Settings & Updates</h3>
-    <ul>
-      <li><strong>Light/Dark Mode:</strong> Smooth transition & remembers choice</li>
-      <li><strong>Upcoming Features:</strong> Project tracker, demos & more</li>
-      <li><strong>Progress:</strong> Building AI safety blog and tools</li>
-    </ul>
-  </aside>
-
+  <!-- Top Nav -->
   <nav class="top-nav" aria-label="Primary navigation">
     <ul>
-      <li><a href="#about">About Me</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="blogs.html">Blog</a></li>
       <li><a href="#tools">Tools</a></li>
       <li><a href="#reading-list">Reading List</a></li>
     </ul>
-    <header>
-      <h1>My Blogs</h1>
-      <p><span class="typed">Thoughts, updates, and insights on development, AI, and cybersecurity.</span></p>
-    </header>
+  </nav>
 
-  <main>
-    
+  <!-- Light/Dark toggle -->
+  <button class="toggle" aria-label="Toggle light and dark mode">🌓</button>
 
-  <section class="widget-grid">
-    <div class="widget-card">
-      <img src="images/phishscanner.png" alt="AI Safety Blog Series" />
-      <div class="widget-content">
-        <h3><span class="emoji-fly">📚</span>AI Safety Blog Series</h3>
-        <p>A series exploring the depths of AI safety and why AI misalignment, ranked as the top most pressing world problem by <a href = "https://80000hours.org/problem-profiles/">80,000 hours</a> is so concerning.</p>
-        <a href="post/AISeries.html">Read the Series →</a>
-      </div>
-    </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="typed scroll-reveal">My Blogs</h1>
+    <p class="scroll-reveal">Thoughts, updates, and insights on development, AI, and cybersecurity.</p>
+    <div class="scroll-indicator" aria-hidden="true">⌄</div>
   </section>
+
+  <!-- Main content -->
+  <main>
+    <section class="widget-grid">
+      <!-- Widget Card 1 -->
+      <div class="widget-card scroll-reveal">
+        <img src="images/phishscanner.png" alt="PhishScanner Tool" />
+        <div class="widget-content">
+          <h3><span class="emoji-fly">🧰</span> Phishing Scanner</h3>
+          <p>A phishing email detection tool for everyday users.</p>
+          <a href="post/post-phishscanner.html">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Widget Card 2 -->
+      <div class="widget-card scroll-reveal">
+        <img src="images/aisafety.png" alt="AI Safety Blog Series" />
+        <div class="widget-content">
+          <h3><span class="emoji-fly">🧠</span> Why AI Safety Matters</h3>
+          <p>How developers can build large models responsibly.</p>
+          <a href="post/aiseries.html">Read More →</a>
+        </div>
+      </div>
+
+      <!-- Widget Card 3 -->
+      <div class="widget-card scroll-reveal">
+        <img src="images/phishscanner.png" alt="Reading List" />
+        <div class="widget-content">
+          <h3>📚 Reading List</h3>
+          <ul class="reading-list">
+            <li><a href="https://intelligence.org/research/" target="_blank" rel="noopener noreferrer">MIRI: AI Safety</a></li>
+            <li><a href="https://cs50.harvard.edu/cybersecurity/" target="_blank" rel="noopener noreferrer">CS50 Cybersecurity</a></li>
+            <li><a href="https://projecteuler.net/" target="_blank" rel="noopener noreferrer">Project Euler</a></li>
+            <li><a href="https://explorabl.es/" target="_blank" rel="noopener noreferrer">Explorable Explanations</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Widget Card 4 -->
+      <div class="widget-card scroll-reveal">
+        <img src="images/aisafety.png" alt="Tech News" />
+        <div class="widget-content">
+          <h3>📰 Latest Tech News</h3>
+          <p>Updates in the tech world.</p>
+          <a href="https://www.bbc.co.uk/news/technology" target="_blank">Read More on BBC →</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-<script>
-  // Sidebar toggle
-  function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const toggleBtn = document.querySelector('.sidebar-toggle');
-    sidebar.classList.toggle('open');
-    toggleBtn.style.display = sidebar.classList.contains('open') ? 'none' : 'block';
-  }
+  <!-- JS Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let lastScrollTop = 0;
+      const hero = document.querySelector('.hero');
+      const nav = document.querySelector('.top-nav');
+      const widgetCards = document.querySelectorAll('.widget-card');
 
-  // Light/Dark mode toggle
-  const toggleBtn = document.querySelector('.toggle');
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-    });
-  }
+      function handleScroll() {
+        const scrollTop = window.scrollY;
 
-      // Reveal widget cards (fly up)
-    widgetCards.forEach((card) => {
-      const rect = card.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        card.classList.add('visible');
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          hero.classList.add('hidden');
+          nav.classList.add('visible');
+        }
+
+        if (scrollTop < lastScrollTop && scrollTop < hero.offsetHeight - 80) {
+          hero.classList.remove('hidden');
+          nav.classList.remove('visible');
+        }
+
+        lastScrollTop = scrollTop;
+
+        widgetCards.forEach((card) => {
+          const rect = card.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100) {
+            card.classList.add('visible');
+          }
+        });
       }
+
+      // Emojis
+      const flyingEmojis = document.querySelectorAll('.emoji-fly');
+      const emojiObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 120);
+            emojiObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      flyingEmojis.forEach(el => emojiObserver.observe(el));
+
+      // Reveal on scroll
+      const revealElements = document.querySelectorAll('.scroll-reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 100);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      revealElements.forEach(el => observer.observe(el));
+
+      // Light/Dark toggle
+      const toggleBtn = document.querySelector('.toggle');
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          document.body.classList.toggle('light');
+        });
+      }
+
+      // Typing animation
+      const typedEl = document.querySelector('.typed');
+      if (typedEl) {
+        const text = typedEl.textContent;
+        typedEl.textContent = '';
+        let i = 0;
+        function typeWriter() {
+          if (i < text.length) {
+            typedEl.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+          }
+        }
+        typeWriter();
+      }
+
+      window.addEventListener('scroll', handleScroll);
     });
-  }
-
-  const flyingEmojis = document.querySelectorAll('.emoji-fly');
-
-const emojiObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry, index) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.classList.add('visible');
-      }, index * 120); // optional stagger
-      emojiObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1 });
-
-flyingEmojis.forEach(el => emojiObserver.observe(el));
-
-
-  // Load theme from localStorage
-  window.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      document.body.classList.add('light');
-      document.querySelector('.toggle').textContent = '🌙';
-    } else {
-      document.querySelector('.toggle').textContent = '☀️';
-    }
-
-  });
-</script>
+  </script>
 </body>
 </html>
