@@ -7,8 +7,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-  
+
 <body>
+  <!-- Sidebar Toggle -->
+  <button class="sidebar-toggle" aria-label="Toggle sidebar menu" onclick="toggleSidebar()">☰ Menu</button>
+
+  <!-- Light/Dark toggle -->
+  <button class="toggle" aria-label="Toggle light and dark mode">🌓</button>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
+    <h3>⚙️ Settings & Updates</h3>
+    <ul>
+      <li><strong>Light/Dark Mode:</strong> Smooth transition & remembers choice</li>
+      <li><strong>Upcoming Features:</strong> Project tracker, demos & more</li>
+      <li><strong>Progress:</strong> Building AI safety blog and tools</li>
+    </ul>
+  </aside>
+
   <!-- Top Nav -->
   <nav class="top-nav" aria-label="Primary navigation">
     <ul>
@@ -19,20 +35,18 @@
     </ul>
   </nav>
 
-  <!-- Light/Dark toggle -->
-  <button class="toggle" aria-label="Toggle light and dark mode">🌓</button>
-
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
     <h1 class="typed scroll-reveal">My Blogs</h1>
     <p class="scroll-reveal">Thoughts, updates, and insights on development, AI, and cybersecurity.</p>
     <div class="scroll-indicator" aria-hidden="true">⌄</div>
   </section>
 
-  <!-- Main content -->
+  <!-- Main -->
   <main>
     <section class="widget-grid">
-      <!-- Widget Card 1 -->
+
+      <!-- Phishing Scanner -->
       <div class="widget-card scroll-reveal">
         <img src="images/phishscanner.png" alt="PhishScanner Tool" />
         <div class="widget-content">
@@ -42,9 +56,9 @@
         </div>
       </div>
 
-      <!-- Widget Card 2 -->
+      <!-- AI Safety Series -->
       <div class="widget-card scroll-reveal">
-        <img src="images/aisafety.png" alt="AI Safety Blog Series" />
+        <img src="images/aisafety.png" alt="AI Safety Blog" />
         <div class="widget-content">
           <h3><span class="emoji-fly">🧠</span> Why AI Safety Matters</h3>
           <p>How developers can build large models responsibly.</p>
@@ -52,7 +66,7 @@
         </div>
       </div>
 
-      <!-- Widget Card 3 -->
+      <!-- Reading List -->
       <div class="widget-card scroll-reveal">
         <img src="images/phishscanner.png" alt="Reading List" />
         <div class="widget-content">
@@ -66,7 +80,7 @@
         </div>
       </div>
 
-      <!-- Widget Card 4 -->
+      <!-- Tech News -->
       <div class="widget-card scroll-reveal">
         <img src="images/aisafety.png" alt="Tech News" />
         <div class="widget-content">
@@ -75,10 +89,11 @@
           <a href="https://www.bbc.co.uk/news/technology" target="_blank">Read More on BBC →</a>
         </div>
       </div>
+
     </section>
   </main>
 
-  <!-- JS Script -->
+  <!-- Scripts -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       let lastScrollTop = 0;
@@ -86,6 +101,7 @@
       const nav = document.querySelector('.top-nav');
       const widgetCards = document.querySelectorAll('.widget-card');
 
+      // Scroll animation
       function handleScroll() {
         const scrollTop = window.scrollY;
 
@@ -109,7 +125,15 @@
         });
       }
 
-      // Emojis
+      // Sidebar toggle
+      window.toggleSidebar = function () {
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.querySelector('.sidebar-toggle');
+        sidebar.classList.toggle('open');
+        toggleBtn.style.display = sidebar.classList.contains('open') ? 'none' : 'block';
+      };
+
+      // Emoji fly-in
       const flyingEmojis = document.querySelectorAll('.emoji-fly');
       const emojiObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
@@ -123,7 +147,7 @@
       }, { threshold: 0.1 });
       flyingEmojis.forEach(el => emojiObserver.observe(el));
 
-      // Reveal on scroll
+      // Scroll reveal
       const revealElements = document.querySelectorAll('.scroll-reveal');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
@@ -145,7 +169,7 @@
         });
       }
 
-      // Typing animation
+      // Typing effect
       const typedEl = document.querySelector('.typed');
       if (typedEl) {
         const text = typedEl.textContent;
