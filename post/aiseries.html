@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI Blog Series</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="../styles.css" />
 </head>
 <body>
   <nav class="top-nav">
@@ -30,11 +30,39 @@
         <div class="widget-content">
           <h3>Why AI Safety Matters</h3>
           <p>Understand the risks of unaligned AI and why responsible development is essential.</p>
-          <a href="post/aiblogseries/post-aisafety.html">Read More →</a>
+          <a href="aiblogseries/post-aisafety.html">Read More →</a>
         </div>
       </div>
 
     </section>
   </main>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const widgetCards = document.querySelectorAll('.widget-card');
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+
+    widgetCards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        card.classList.add('visible');
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealElements.forEach(el => observer.observe(el));
+  });
+</script>
+
 </body>
 </html>
