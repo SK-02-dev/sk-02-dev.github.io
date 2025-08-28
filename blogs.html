@@ -12,7 +12,7 @@
   <button class="sidebar-toggle" aria-label="Toggle sidebar menu" onclick="toggleSidebar()">☰ Menu</button>
 
   <!-- Light/Dark Mode Toggle Button -->
-  <button class="toggle" aria-label="Toggle light/dark mode" onclick="toggleMode()">🌙</button>
+  <button class="toggle" aria-label="Toggle light and dark mode">🌓</button>
 
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
@@ -24,33 +24,31 @@
     </ul>
   </aside>
 
-  <main>
+  <nav class="top-nav" aria-label="Primary navigation">
+    <ul>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="blogs.html">Blog</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#reading-list">Reading List</a></li>
+    </ul>
     <header>
       <h1>My Blogs</h1>
       <p><span class="typed">Thoughts, updates, and insights on development, AI, and cybersecurity.</span></p>
     </header>
 
-    <nav role="navigation" aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="blogs.html" aria-current="page">Blog</a>
-      <!-- <a href="projects.html">Projects</a> Uncomment when ready -->
-    </nav>
+  <main>
+    
 
-  <section class="section blog-list">
-       <!-- <article class="blog-card">
-        <h3>AI Safety: Why It Matters</h3>
-        <p>Exploring the risks of large models and how developers can build responsibly.</p>
-        <a href="post/post-aisafety.html">Read more →</a>
-      </article> -->
-
-      <article class="blog-card">
-        <h3>PhishScanner: A Tool to Detect Suspicious Emails</h3>
-        <p>An overview of my phishing detection tool under development, designed for everyday users.</p>
-        <a href="post/post-phishscanner.html">Read more →</a>
-      </article>
-
-      <!-- Add more blog cards here as needed -->
-    </section>
+  <section class="widget-grid">
+    <div class="widget-card">
+      <img src="images/phishscanner.png" alt="AI Safety Blog Series" />
+      <div class="widget-content">
+        <h3><span class="emoji-fly">📚</span>AI Safety Blog Series</h3>
+        <p>A series exploring the depths of AI safety and why AI misalignment, ranked as the top most pressing world problem by <a href = "https://80000hours.org/problem-profiles/">80,000 hours</a> is so concerning.</p>
+        <a href="post/AISeries.html">Read the Series →</a>
+      </div>
+    </div>
+  </section>
   </main>
 
 <script>
@@ -63,12 +61,37 @@
   }
 
   // Light/Dark mode toggle
-  function toggleMode() {
-    document.body.classList.toggle('light');
-    const isLight = document.body.classList.contains('light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    document.querySelector('.toggle').textContent = isLight ? '🌙' : '☀️';
+  const toggleBtn = document.querySelector('.toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+    });
   }
+
+      // Reveal widget cards (fly up)
+    widgetCards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        card.classList.add('visible');
+      }
+    });
+  }
+
+  const flyingEmojis = document.querySelectorAll('.emoji-fly');
+
+const emojiObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, index * 120); // optional stagger
+      emojiObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+flyingEmojis.forEach(el => emojiObserver.observe(el));
+
 
   // Load theme from localStorage
   window.addEventListener('DOMContentLoaded', () => {
@@ -79,6 +102,7 @@
     } else {
       document.querySelector('.toggle').textContent = '☀️';
     }
+
   });
 </script>
 </body>
